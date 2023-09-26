@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lora:wght@700&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&family=Lora:wght@600&display=swap');
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body{
-  background:#FFF;
-  font-family:'lora' 'inter'sans-serif;
+  
+  font-family:'lora','inconsolata' 'inter',sans-serif;
   height:100vh;
+  
 }
-*{
-  background: var(--FFFFFF, #FFF);
 
-}
+
 .header{
   display: flex;
   align-items:center;
@@ -21,13 +22,44 @@ body{
 .input{
   
   border-radius: 16px;
-  background: var(--F4F4F4, #F4F4F4);
+  
 
 }
-.container{
-  box-sizing:border-box;
-  height:100vh;
+.dic-container{
+  display:flex;
+  flex-direction:column;
+  height: 100vh;
+  width:500px;
+  margin-left:auto;
+  margin-right:auto;
+  
 }
 .lists{
   list-style: bullets;
+}
+.toggle{
+  font-size:2.5rem;
+  font-weight:light;
+  color:light-grey;
+}
+.moon{
+  font-size:1.5rem;
+}
+ .emoji{
+  color:yellow;
+ }
+
+
+ /* CSS styles for the playing icon (speaker effect) */
+.playing {
+  animation: pulse 1s infinite alternate; /* Example animation */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
 }

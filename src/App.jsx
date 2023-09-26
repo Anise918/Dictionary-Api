@@ -3,7 +3,6 @@ import WordsApi from './Components/WordsApi'
 import'./index.css'
 function App() {
  
-
   return (
     <>
        
