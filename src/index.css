@@ -63,3 +63,23 @@ body{
     transform: scale(1.1);
   }
 }
+
+
+.search-container {
+  position: relative;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+
+.vertical-line {
+  width: 5px; 
+  height: 100%; 
+  
+}

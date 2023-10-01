@@ -9,6 +9,8 @@ export const darkTheme={
     text:'white',
     toggleBorder:'purple',
     input:'1f1f1f',
-    icon: 'purple'
+    icon: 'purple',
+    
+
     
 }

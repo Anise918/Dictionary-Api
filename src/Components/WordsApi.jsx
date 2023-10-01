@@ -1,4 +1,4 @@
- import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Switch from 'react-switch';
 import {BsMoon} from 'react-icons/bs'
@@ -17,6 +17,9 @@ export default function WordsApi() {
   const[word,setWord] =useState('')
  const[theme, setTheme] =useState('dark')
   const[isPlaying, setIsPlaying]=useState(false)
+  const[isOpen, setIsOpen]=useState(false)
+  const toggling=()=>setIsOpen(!isOpen)
+  const[selectedFont, setSelectedFont]=useState('')
   
 
   /*const options=[
@@ -24,6 +27,12 @@ export default function WordsApi() {
     {value: "SERIF", label: "serif"},
     {value:"monospace" , label:"monospace"},
   ]*/
+  const handleDropdownItemClick = (event) => {
+    const clickedFont = event.target.innerText;
+    setSelectedFont(clickedFont); 
+  };
+
+
 
   const toggleTheme=()=>{
     if(theme==='light'){
@@ -111,39 +120,53 @@ export default function WordsApi() {
   <path d="M11 9H23" stroke="#757575" stroke-width="1.5" stroke-linecap="round"/>
 </svg>
 
+<div className='flex flex-row items-center'>
 
-
-<form className=''>
-
-  <select
+<div className='flex flex-row items-center'>
+  <div className='relative'>
+    <span style={{width:'100px',}} className=" pr-4  flex justify-around border rounded-lg cursor-pointer">
+      Serif <AiOutlineCaretDown className='text-purple-700' onClick={toggling} />
+    </span>
+    {isOpen && (
+  <ul
+    style={{ position: 'absolute', top: '2rem',  }}
+    className={`dropDown absolute left-0 mt-2 w-25 border rounded-lg shadow-lg z-10 ${
+      theme === 'dark' ? 'bg-custom-1F1F1F shadow-2xl border-transparent   hover:shadow-purple-700 duration-200 ' : 'bg-white'
+    }`}
+  >
+    <li className="py-2 pl-4 " onClick={handleDropdownItemClick} >Monospace</li>
+    <li className="py-2 pl-4 "onClick={handleDropdownItemClick}>Sans-serif</li>
+    <li className="py-2 pl-4 text-purple-600 " onClick={handleDropdownItemClick}>Serif</li>
+  </ul>
+)}
     
-    
-    className={`${
-      theme === 'dark'
-        ? 'bg-black text-white hover:bg-gray-900 shadow-sm border border-purple-500 rounded-lg'
-        : 'bg-white text-black hover:bg-gray-200 rounded'
-    }`}>
-        <option className='light: bg-white text-black pointer-events-none' value='serif'>Serif</option>
-        <option className='light: bg-white text-black'value='sans serif'>Sans-serif</option>
-        <option className='light: bg-white text-black'value='monospace'>Monospace</option>
-        
-    </select>
-</form>
+  </div>
+
+  
+<div class="vertical-line"></div>
+
+  
+  <div className='flex flex-row'>
+    <button className='flex flex-row cursor-pointer' onClick={toggleTheme}>
+      <Switch className='text-purple-700' checked={theme==='dark'} />
+      <BsMoon className={`moon inline-block ${theme === 'dark' ? 'moon-dark' : 'moon-light'}`} />
+    </button>
+  </div>
 </div>
 
-    <button className='flex flex-row cursor-pointer ' onClick={toggleTheme}>
-    
-    <Switch checked={theme==='dark'} />
-    <BsMoon className={`moon inline-block ${theme === 'dark' ? 'moon-dark' : 'moon-light'}`} />
-    
 
-  </button>
+
+    
+    
   
+  </div>
+  </div>
   
 
 </nav>
       <div className='relative'>
         <div>
+          <div className=' relative search-container'>
         <form
   className={`w-full h-2rem  outline-none border rounded-lg px-3 py-4 shadow-sm ${
     theme === 'dark' ? 'bg-custom-1F1F1F border-purple-900' : 'bg-gray-100 border-custom-A445ED'
@@ -173,6 +196,7 @@ export default function WordsApi() {
         </button>
       </div>
         </form>
+        </div>
         
         {words && (
   <div className=' mt-20 flex flex-row justify-between font-bold'>
@@ -243,7 +267,7 @@ export default function WordsApi() {
   
 }
 
-{!words && word &&  (
+{!words &&  (
   <div>
      
   
