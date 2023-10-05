@@ -14,23 +14,48 @@ export default function WordsApi() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const[words, setWords] =useState()
-  const[word,setWord] =useState('')
+  const[word,setWord] =useState('keyboard')
  const[theme, setTheme] =useState('dark')
   const[isPlaying, setIsPlaying]=useState(false)
   const[isOpen, setIsOpen]=useState(false)
   const toggling=()=>setIsOpen(!isOpen)
-  const[selectedFont, setSelectedFont]=useState('')
+  const[selectedFont, setSelectedFont]=useState('serif')
   
 
-  /*const options=[
-    {value:"SANS-SERIF", label:"sans-serif"},
-    {value: "SERIF", label: "serif"},
-    {value:"monospace" , label:"monospace"},
-  ]*/
+  useEffect(() => {
+    const getDefinition = async () => {
+      setIsLoading(true);
+      setIsError(false);
+
+      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+
+      if (response.ok) {
+        const data = await response.json();
+        setWords(data[0]);
+      } else {
+        setIsError(true);
+      }
+
+      setIsLoading(false);
+    };
+
+    getDefinition(); 
+  }, [word]);
+
+
+
+
+
+
   const handleDropdownItemClick = (event) => {
+    console.log('Item clicked:', event.target.innerText)
+
     const clickedFont = event.target.innerText;
-    setSelectedFont(clickedFont); 
+    setSelectedFont(clickedFont);
+    setIsOpen(false); 
   };
+
+
 
 
 
@@ -124,8 +149,8 @@ export default function WordsApi() {
 
 <div className='flex flex-row items-center'>
   <div className='relative'>
-    <span style={{width:'100px',}} className=" pr-4  flex justify-around border rounded-lg cursor-pointer">
-      Serif <AiOutlineCaretDown className='text-purple-700' onClick={toggling} />
+    <span style={{width:'100px', cursor:'pointer',}} className=" pr-4  flex justify-around border rounded-lg cursor-pointer">
+      Serif<AiOutlineCaretDown className='text-purple-700' onClick={toggling} />
     </span>
     {isOpen && (
   <ul
