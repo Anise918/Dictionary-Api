@@ -47,11 +47,9 @@ export default function WordsApi() {
 
 
 
-  const handleDropdownItemClick = (event) => {
-    console.log('Item clicked:', event.target.innerText)
-
-    const clickedFont = event.target.innerText;
-    setSelectedFont(clickedFont);
+  const handleDropdownItemClick = (font) => {
+    
+    setSelectedFont(font);
     setIsOpen(false); 
   };
 
@@ -149,7 +147,7 @@ export default function WordsApi() {
 
 <div className='flex flex-row items-center'>
   <div className='relative'>
-    <span style={{width:'100px', cursor:'pointer',}} className=" pr-4  flex justify-around border rounded-lg cursor-pointer">
+    <span style={{width:'100px', cursor:'pointer',}} className=" pr-4  flex flex-row align-center justify-between border rounded-lg cursor-pointer">
       Serif<AiOutlineCaretDown className='text-purple-700' onClick={toggling} />
     </span>
     {isOpen && (
@@ -159,20 +157,22 @@ export default function WordsApi() {
       theme === 'dark' ? 'bg-custom-1F1F1F shadow-2xl border-transparent   hover:shadow-purple-700 duration-200 ' : 'bg-white'
     }`}
   >
-    <li className="py-2 pl-4 " onClick={handleDropdownItemClick} >Monospace</li>
-    <li className="py-2 pl-4 "onClick={handleDropdownItemClick}>Sans-serif</li>
-    <li className="py-2 pl-4 text-purple-600 " onClick={handleDropdownItemClick}>Serif</li>
+   <li className="py-2 pl-4  cursor-pointer" onClick={handleDropdownItemClick} >Monospace</li>
+    <li className="py-2 pl-4 cursor-pointer  "onClick={handleDropdownItemClick}>Sans-serif</li>
+    <li className="py-2 pl-4 cursor-pointer text-purple-600 " onClick={handleDropdownItemClick}>Serif</li>
+
+    
   </ul>
 )}
     
   </div>
 
   
-<div class="vertical-line"></div>
+<div style={{borderBottom:'4px',}} className='h-6 w-0.5 ml-4 bg-gray-200'></div>
 
   
   <div className='flex flex-row'>
-    <button className='flex flex-row cursor-pointer' onClick={toggleTheme}>
+    <button className='flex flex-row cursor-pointer ml-4' onClick={toggleTheme}>
       <Switch className='text-purple-700' checked={theme==='dark'} />
       <BsMoon className={`moon inline-block ${theme === 'dark' ? 'moon-dark' : 'moon-light'}`} />
     </button>
@@ -180,8 +180,6 @@ export default function WordsApi() {
 </div>
 
 
-
-    
     
   
   </div>
