@@ -133,7 +133,7 @@ export default function WordsApi() {
  
   return (
     <ThemeProvider theme={theme==='light'? lightTheme: darkTheme}>
-      <div className='dic-container w-375 h-1065 lg:w-1440 lg:h-1205 md:w-768 md:h-1197'>
+      <div className='dic-container w-full h-1065 lg:w-1440 lg:h-1205 md:w-768 md:h-1197'>
         <GlobalStyles/>
 
     <nav className='nav flex flex-row p-4 '>
@@ -202,7 +202,7 @@ export default function WordsApi() {
        
 <input
       type="text"
-      className={`flex-grow outline-none border-none ${
+      className={`w-full flex-grow outline-none border-none ${
         theme === 'dark'
           ? 'bg-custom-1F1F1F text-white rounded-lg'
           : 'bg-gray-100 text-gray-900 rounded-lg'
