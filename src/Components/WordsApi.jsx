@@ -19,7 +19,7 @@ export default function WordsApi() {
   const[isPlaying, setIsPlaying]=useState(false)
   const[isOpen, setIsOpen]=useState(false)
   const toggling=()=>setIsOpen(!isOpen)
-  const[selectedFont, setSelectedFont]=useState('serif')
+  const[selectedFont, setSelectedFont]=useState('Serif')
   
 
   useEffect(() => {
@@ -51,6 +51,7 @@ export default function WordsApi() {
     
     setSelectedFont(font);
     setIsOpen(false); 
+    document.body.style.fontFamily=font
   };
 
 
@@ -132,7 +133,7 @@ export default function WordsApi() {
  
   return (
     <ThemeProvider theme={theme==='light'? lightTheme: darkTheme}>
-      <div className='dic-container w-full h-1065 lg:w-1440 lg:h-1205 md:w-768 md:h-1197'>
+      <div className='dic-container w-375 h-1065 lg:w-1440 lg:h-1205 md:w-768 md:h-1197'>
         <GlobalStyles/>
 
     <nav className='nav flex flex-row p-4 '>
@@ -147,9 +148,9 @@ export default function WordsApi() {
 
 <div className='flex flex-row items-center'>
   <div className='relative'>
-    <span style={{width:'100px', cursor:'pointer',}} className=" pr-4  flex flex-row align-center justify-between border rounded-lg cursor-pointer">
-      Serif<AiOutlineCaretDown className='text-purple-700' onClick={toggling} />
-    </span>
+    <button style={{width:'110px', cursor:'pointer',}}  onClick={toggling} className=" pr-4  flex flex-row align-center justify-between border-none cursor-pointer">
+      {selectedFont}<AiOutlineCaretDown className='text-purple-700' />
+    </button>
     {isOpen && (
   <ul
     style={{ position: 'absolute', top: '2rem',  }}
@@ -157,9 +158,9 @@ export default function WordsApi() {
       theme === 'dark' ? 'bg-custom-1F1F1F shadow-2xl border-transparent   hover:shadow-purple-700 duration-200 ' : 'bg-white'
     }`}
   >
-   <li className="py-2 pl-4  cursor-pointer" onClick={handleDropdownItemClick} >Monospace</li>
-    <li className="py-2 pl-4 cursor-pointer  "onClick={handleDropdownItemClick}>Sans-serif</li>
-    <li className="py-2 pl-4 cursor-pointer text-purple-600 " onClick={handleDropdownItemClick}>Serif</li>
+   <li className="py-2 pl-4  cursor-pointer" onClick={()=>handleDropdownItemClick('monospace')} >Monospace</li>
+    <li className="py-2 pl-4 cursor-pointer  "onClick={()=>handleDropdownItemClick('sans-serif')}>Sans-serif</li>
+    <li className="py-2 pl-4 cursor-pointer text-purple-600 " onClick={()=>handleDropdownItemClick('serif')}>Serif</li>
 
     
   </ul>
